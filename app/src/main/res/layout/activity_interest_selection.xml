@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:text="Your\nInterests"
+        android:textColor="@color/text_black"
+        android:textSize="38sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="You may select upto 10 topics"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="34dp"
+        android:layout_weight="1"
+        android:columnCount="2"
+        android:rowCount="4">
+
+        <TextView style="@style/TopicChip" android:text="Algorithms" />
+        <TextView style="@style/TopicChip" android:text="Data Structures" />
+        <TextView style="@style/TopicChip" android:text="Web Development" />
+        <TextView style="@style/TopicChip" android:text="Testing" />
+        <TextView style="@style/TopicChip" android:text="Algorithms" />
+        <TextView style="@style/TopicChip" android:text="Data Structures" />
+        <TextView style="@style/TopicChip" android:text="Web Development" />
+        <TextView style="@style/TopicChip" android:text="Testing" />
+    </GridLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/bg_green_button"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/text_black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</LinearLayout>

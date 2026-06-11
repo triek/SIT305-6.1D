@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIT30561D">
+        <activity android:name=".ResultsActivity" />
+        <activity android:name=".GeneratedTaskActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".InterestSelectionActivity" />
+        <activity android:name=".AccountSetupActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
