@@ -4,6 +4,13 @@ plugins {
 }
 
 android {
+    val geminiApiKey = providers.gradleProperty("GEMINI_API_KEY")
+        .orElse(providers.environmentVariable("GEMINI_API_KEY"))
+        .orElse("")
+        .get()
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+
     namespace = "com.example.sit305_61d"
     compileSdk {
         version = release(36) {
@@ -19,6 +26,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
 
     buildTypes {
@@ -35,6 +43,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
