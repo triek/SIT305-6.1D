@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello,\nYour Name"
+            android:textColor="@color/text_black"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_avatar_circle"
+            android:padding="6dp"
+            android:src="@drawable/ic_account_circle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/bg_notification"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_notifications" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:text="You have 1 task due" android:textColor="@color/text_black" android:textSize="16sp" android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_blue_card"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="18dp">
+        <ImageView android:layout_width="34dp" android:layout_height="34dp" android:src="@drawable/ic_auto_awesome" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generated Task 1" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Small Description for the generated Task" android:textColor="@color/text_black" android:textSize="14sp" />
+        </LinearLayout>
+        <ImageButton android:layout_width="46dp" android:layout_height="46dp" android:background="@drawable/bg_circle_green" android:contentDescription="Open task" android:padding="10dp" android:src="@drawable/ic_arrow_forward" />
+    </LinearLayout>
+</LinearLayout>
