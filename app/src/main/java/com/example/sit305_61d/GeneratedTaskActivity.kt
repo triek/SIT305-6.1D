@@ -247,7 +247,8 @@ private fun studentInterestsText(): String = AppData.studentProfile.selectedInte
 private fun learningHistoryText(): String = AppData.studentProfile.learningHistory.joinToString()
 
 private fun Throwable.toReadableMessage(): String = when (this) {
+    is GeminiApiException -> message ?: "Gemini request failed. Please check your API key and try again."
     is IllegalStateException -> message ?: "Gemini is not configured yet. Please check the API key."
-    is IOException -> "Gemini request failed. Please check your internet connection and try again."
+    is IOException -> "Could not reach Gemini. Please check your internet connection and try again."
     else -> "Gemini request failed: ${message ?: "Please try again."}"
 }

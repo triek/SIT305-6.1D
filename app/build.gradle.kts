@@ -1,13 +1,21 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    val geminiApiKey = providers.gradleProperty("GEMINI_API_KEY")
-        .orElse(providers.environmentVariable("GEMINI_API_KEY"))
-        .orElse("")
-        .get()
+    val localProperties = Properties().apply {
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.isFile) {
+            localPropertiesFile.inputStream().use(::load)
+        }
+    }
+    val geminiApiKey = localProperties.getProperty("GEMINI_API_KEY", "")
+        .trim()
+        .removeSurrounding("\"")
+        .removeSurrounding("'")
         .replace("\\", "\\\\")
         .replace("\"", "\\\"")
 
