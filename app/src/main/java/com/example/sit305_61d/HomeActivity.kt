@@ -15,7 +15,7 @@ class HomeActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         val task = AppData.currentTask()
-        findViewById<TextView>(R.id.homeGreetingText).text = "Hello,\n${AppData.studentProfile.name}"
+        findViewById<TextView>(R.id.homeGreetingText).text = "Hello,\n${AppData.currentStudentName}"
         findViewById<TextView>(R.id.taskTitleText).text = task.title
         findViewById<TextView>(R.id.taskDescriptionText).text = task.description
         findViewById<TextView>(R.id.notificationText).text = "You have 1 task due today"

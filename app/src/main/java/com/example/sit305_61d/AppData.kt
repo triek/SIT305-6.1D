@@ -18,6 +18,8 @@ data class SampleTask(
 )
 
 object AppData {
+    var currentStudentName = "Alex Johnson"
+
     val studentProfile = StudentProfile(
         name = "Alex Johnson",
         email = "alex.johnson@student.deakin.edu.au",

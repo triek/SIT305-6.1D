@@ -23,15 +23,15 @@
             android:elevation="8dp"
             android:orientation="vertical"
             android:padding="20dp">
-            <TextView android:id="@+id/questionOneTitleText" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1. Question 1" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Choose the best answer for this personalised practice task." android:textColor="@color/text_black" android:textSize="15sp" />
-            <RadioButton android:id="@+id/answerOneRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="Answer 1" android:textColor="@color/text_black" android:textSize="15sp" />
-            <RadioButton android:id="@+id/answerTwoRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Answer 2" android:textColor="@color/text_black" android:textSize="15sp" />
-            <RadioButton android:id="@+id/answerThreeRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Answer 3" android:textColor="@color/text_black" android:textSize="15sp" />
+            <TextView android:id="@+id/questionOneTitleText" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1. Question 1" android:textColor="@color/card_text_white" android:textSize="20sp" android:textStyle="bold" />
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Choose the best answer for this personalised practice task." android:textColor="@color/card_text_white" android:textSize="15sp" />
+            <RadioButton android:id="@+id/answerOneRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="Answer 1" android:textColor="@color/card_text_white" android:textSize="15sp" />
+            <RadioButton android:id="@+id/answerTwoRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Answer 2" android:textColor="@color/card_text_white" android:textSize="15sp" />
+            <RadioButton android:id="@+id/answerThreeRadio" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Answer 3" android:textColor="@color/card_text_white" android:textSize="15sp" />
         </RadioGroup>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="110dp" android:layout_marginTop="18dp" android:background="@drawable/bg_blue_card" android:elevation="8dp" android:gravity="center_vertical" android:orientation="horizontal" android:padding="20dp">
-            <TextView android:id="@+id/questionTwoTitleText" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="2. Question 2" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
+            <TextView android:id="@+id/questionTwoTitleText" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="2. Question 2" android:textColor="@color/card_text_white" android:textSize="20sp" android:textStyle="bold" />
             <ImageButton android:layout_width="42dp" android:layout_height="42dp" android:background="@drawable/bg_circle_green" android:contentDescription="Expand question" android:padding="9dp" android:src="@drawable/ic_arrow_forward" />
         </LinearLayout>
 

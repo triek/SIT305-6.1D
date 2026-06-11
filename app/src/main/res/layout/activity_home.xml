@@ -60,8 +60,8 @@
         android:padding="18dp">
         <ImageView android:layout_width="34dp" android:layout_height="34dp" android:src="@drawable/ic_auto_awesome" />
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:layout_weight="1" android:orientation="vertical">
-            <TextView android:id="@+id/taskTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generated Task 1" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
-            <TextView android:id="@+id/taskDescriptionText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Small Description for the generated Task" android:textColor="@color/text_black" android:textSize="14sp" />
+            <TextView android:id="@+id/taskTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generated Task 1" android:textColor="@color/card_text_white" android:textSize="20sp" android:textStyle="bold" />
+            <TextView android:id="@+id/taskDescriptionText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Small Description for the generated Task" android:textColor="@color/card_text_white" android:textSize="14sp" />
         </LinearLayout>
         <ImageButton android:id="@+id/openTaskButton" android:layout_width="46dp" android:layout_height="46dp" android:background="@drawable/bg_circle_green" android:contentDescription="Open task" android:padding="10dp" android:src="@drawable/ic_arrow_forward" />
     </LinearLayout>
