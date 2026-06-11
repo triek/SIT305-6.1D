@@ -40,6 +40,7 @@
             android:textSize="16sp" />
 
         <RadioGroup
+            android:id="@+id/questionOneAnswerGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -120,161 +121,11 @@
                 android:src="@drawable/ic_arrow_forward" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/aiLearningUtilitiesCompose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_blue_card"
-            android:elevation="8dp"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="AI Learning Utilities"
-                android:textColor="@color/card_text_white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="Use dummy AI help while the real LLM API is still safely disconnected."
-                android:textColor="@color/card_text_white"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/generateHintButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_green_button"
-                android:text="Generate Hint"
-                android:textAllCaps="false"
-                android:textColor="@color/text_black"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/explainAnswerButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_green_button"
-                android:text="Explain Answer"
-                android:textAllCaps="false"
-                android:textColor="@color/text_black"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/summariseTopicButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_green_button"
-                android:text="Summarise Topic"
-                android:textAllCaps="false"
-                android:textColor="@color/text_black"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/createFlashcardsButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_green_button"
-                android:text="Create Flashcards"
-                android:textAllCaps="false"
-                android:textColor="@color/text_black"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/suggestStudyPlanButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_green_button"
-                android:text="Suggest Study Plan"
-                android:textAllCaps="false"
-                android:textColor="@color/text_black"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ProgressBar
-                    android:id="@+id/aiLoadingIndicator"
-                    style="?android:attr/progressBarStyleSmall"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:text="Loading appears here while the dummy AI thinks."
-                    android:textColor="@color/card_text_white"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Prompt sent to LLM"
-                android:textColor="@color/card_text_white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/aiPromptText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@color/field_white"
-                android:padding="12dp"
-                android:text="Tap an AI learning help button to preview the prompt."
-                android:textColor="@color/text_black"
-                android:textSize="13sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:text="AI response"
-                android:textColor="@color/card_text_white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/aiResponseText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@color/field_white"
-                android:padding="12dp"
-                android:text="The dummy AI response will appear below the prompt."
-                android:textColor="@color/text_black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/aiFailureText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="AI learning help failed. Please try again in a moment."
-                android:textColor="#FFCDD2"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:layout_marginTop="24dp" />
 
         <Button
             android:id="@+id/submitTaskButton"

@@ -2,24 +2,42 @@ package com.example.sit305_61d
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
+import android.widget.Button as AndroidButton
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.sit305_61d.ui.theme.SIT30561DTheme
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class GeneratedTaskActivity : ComponentActivity() {
-    private val dummyAiDelayMs = 900L
-    private val handler = Handler(Looper.getMainLooper())
-    private lateinit var aiPromptText: TextView
-    private lateinit var aiResponseText: TextView
-    private lateinit var aiFailureText: TextView
-    private lateinit var aiLoadingIndicator: ProgressBar
-    private lateinit var aiActionButtons: List<Button>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generated_task)
@@ -33,95 +51,203 @@ class GeneratedTaskActivity : ComponentActivity() {
         findViewById<RadioButton>(R.id.answerThreeRadio).text = task.options[2]
         findViewById<TextView>(R.id.questionTwoTitleText).text = "2. ${task.followUpQuestion}"
 
-        setupLearningUtilities(task)
+        val answerGroup = findViewById<RadioGroup>(R.id.questionOneAnswerGroup)
+        findViewById<ComposeView>(R.id.aiLearningUtilitiesCompose).setContent {
+            SIT30561DTheme {
+                AiLearningUtilities(
+                    task = task,
+                    selectedAnswerProvider = {
+                        val selectedAnswerId = answerGroup.checkedRadioButtonId
+                        if (selectedAnswerId == -1) {
+                            ""
+                        } else {
+                            answerGroup.findViewById<RadioButton>(selectedAnswerId)
+                                ?.text
+                                ?.toString()
+                                .orEmpty()
+                        }
+                    }
+                )
+            }
+        }
 
-        findViewById<Button>(R.id.submitTaskButton).setOnClickListener {
+        findViewById<AndroidButton>(R.id.submitTaskButton).setOnClickListener {
             startActivity(Intent(this, ResultsActivity::class.java))
         }
     }
+}
 
-    private fun setupLearningUtilities(task: SampleTask) {
-        aiPromptText = findViewById(R.id.aiPromptText)
-        aiResponseText = findViewById(R.id.aiResponseText)
-        aiFailureText = findViewById(R.id.aiFailureText)
-        aiLoadingIndicator = findViewById(R.id.aiLoadingIndicator)
+@Composable
+private fun AiLearningUtilities(
+    task: SampleTask,
+    selectedAnswerProvider: () -> String
+) {
+    var promptText by remember { mutableStateOf("Tap an AI learning help button to preview the prompt.") }
+    var aiResponseText by remember { mutableStateOf("The Gemini response will appear below the prompt.") }
+    var isLoading by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
 
-        val hintButton = findViewById<Button>(R.id.generateHintButton)
-        val explainButton = findViewById<Button>(R.id.explainAnswerButton)
-        val summaryButton = findViewById<Button>(R.id.summariseTopicButton)
-        val flashcardsButton = findViewById<Button>(R.id.createFlashcardsButton)
-        val studyPlanButton = findViewById<Button>(R.id.suggestStudyPlanButton)
-        aiActionButtons = listOf(hintButton, explainButton, summaryButton, flashcardsButton, studyPlanButton)
+    fun runGeminiPrompt(prompt: String) {
+        promptText = prompt
+        aiResponseText = ""
+        errorMessage = ""
+        isLoading = true
 
-        hintButton.setOnClickListener { requestLearningHelp(AiLearningAction.GENERATE_HINT, task) }
-        explainButton.setOnClickListener { requestLearningHelp(AiLearningAction.EXPLAIN_ANSWER, task) }
-        summaryButton.setOnClickListener { requestLearningHelp(AiLearningAction.SUMMARISE_TOPIC, task) }
-        flashcardsButton.setOnClickListener { requestLearningHelp(AiLearningAction.CREATE_FLASHCARDS, task) }
-        studyPlanButton.setOnClickListener { requestLearningHelp(AiLearningAction.SUGGEST_STUDY_PLAN, task) }
-    }
-
-    private fun requestLearningHelp(action: AiLearningAction, task: SampleTask) {
-        val prompt = buildPrompt(action, task)
-        aiPromptText.text = prompt
-        aiResponseText.text = "Waiting for dummy AI response..."
-        aiFailureText.visibility = View.GONE
-        setLoadingState(true)
-
-        handler.postDelayed({
-            runCatching { dummyAiResponse(action, task) }
+        coroutineScope.launch {
+            runCatching { GeminiApiClient.generateContent(prompt) }
                 .onSuccess { response ->
-                    aiResponseText.text = response
-                    aiFailureText.visibility = View.GONE
+                    aiResponseText = response
                 }
-                .onFailure {
-                    aiResponseText.text = "No response available."
-                    aiFailureText.text = "AI learning help failed. Please try again in a moment."
-                    aiFailureText.visibility = View.VISIBLE
+                .onFailure { error ->
+                    aiResponseText = "No Gemini response available."
+                    errorMessage = error.toReadableMessage()
                 }
-            setLoadingState(false)
-        }, dummyAiDelayMs)
-    }
-
-    private fun setLoadingState(isLoading: Boolean) {
-        aiLoadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
-        aiActionButtons.forEach { it.isEnabled = !isLoading }
-    }
-
-    private fun buildPrompt(action: AiLearningAction, task: SampleTask): String {
-        val selectedInterests = AppData.studentProfile.selectedInterests.joinToString()
-        return """
-            Student: ${AppData.currentStudentName}
-            Interests: $selectedInterests
-            Task: ${task.title}
-            Description: ${task.description}
-            Question: ${task.question}
-            Options: ${task.options.joinToString()}
-            Follow-up: ${task.followUpQuestion}
-
-            Request: ${action.promptRequest}
-        """.trimIndent()
-    }
-
-    private fun dummyAiResponse(action: AiLearningAction, task: SampleTask): String {
-        return when (action) {
-            AiLearningAction.GENERATE_HINT -> "Hint: Focus on the key phrase in the question. For '${task.question}', compare each option against the behaviour being described before choosing."
-            AiLearningAction.EXPLAIN_ANSWER -> "Explanation: The strongest answer is '${task.options.first()}' because it directly matches the concept being tested. The other options are useful to recognise, but they do not fit this task as well."
-            AiLearningAction.SUMMARISE_TOPIC -> "Topic summary: ${task.title} is about applying ${task.description.lowercase()} Keep the main idea, a practical example, and one limitation in mind while revising."
-            AiLearningAction.CREATE_FLASHCARDS -> "Flashcards:\n1. Q: What is the core idea? A: ${task.options.first()} best matches the prompt.\n2. Q: What should you explain next? A: ${task.followUpQuestion}\n3. Q: How should you study it? A: Practise with one small example, then explain your reasoning aloud."
-            AiLearningAction.SUGGEST_STUDY_PLAN -> "Study plan:\n• 5 min: Re-read the question and identify keywords.\n• 10 min: Review why '${task.options.first()}' is the best answer.\n• 10 min: Write a short response to '${task.followUpQuestion}' and check it against your notes."
+            isLoading = false
         }
     }
 
-    override fun onDestroy() {
-        handler.removeCallbacksAndMessages(null)
-        super.onDestroy()
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .background(colorResource(id = R.color.card_blue))
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                text = "AI Learning Utilities",
+                color = colorResource(id = R.color.card_text_white),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Use Gemini to get quick help for this task.",
+                color = colorResource(id = R.color.card_text_white),
+                fontSize = 14.sp
+            )
+
+            AiActionButton(
+                text = "Generate Hint",
+                isLoading = isLoading,
+                onClick = {
+                    runGeminiPrompt(
+                        LearningPromptBuilder.buildHintPrompt(
+                            topic = task.title,
+                            question = task.question,
+                            studentInterests = studentInterestsText(),
+                            learningHistory = learningHistoryText()
+                        )
+                    )
+                }
+            )
+            AiActionButton(
+                text = "Explain Answer",
+                isLoading = isLoading,
+                onClick = {
+                    runGeminiPrompt(
+                        LearningPromptBuilder.buildExplanationPrompt(
+                            topic = task.title,
+                            question = task.question,
+                            selectedAnswer = selectedAnswerProvider().ifBlank { "No answer selected yet" },
+                            correctAnswer = task.options.first(),
+                            learningHistory = learningHistoryText()
+                        )
+                    )
+                }
+            )
+            AiActionButton(
+                text = "Create Flashcards",
+                isLoading = isLoading,
+                onClick = {
+                    runGeminiPrompt(
+                        LearningPromptBuilder.buildFlashcardsPrompt(
+                            topic = task.title,
+                            studentInterests = studentInterestsText(),
+                            learningHistory = learningHistoryText()
+                        )
+                    )
+                }
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                if (isLoading) {
+                    CircularProgressIndicator(color = colorResource(id = R.color.card_text_white))
+                }
+                Text(
+                    text = if (isLoading) "Loading Gemini response..." else "Tap a button to ask Gemini for help.",
+                    color = colorResource(id = R.color.card_text_white),
+                    fontSize = 13.sp
+                )
+            }
+
+            AiTextSection(title = "Prompt sent to LLM", body = promptText, fontSize = 13)
+            AiTextSection(title = "AI response", body = aiResponseText, fontSize = 14)
+
+            if (errorMessage.isNotBlank()) {
+                Text(
+                    text = errorMessage,
+                    color = Color(0xFFFFCDD2),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
     }
 }
 
-private enum class AiLearningAction(val promptRequest: String) {
-    GENERATE_HINT("Generate one short hint without giving away the full answer."),
-    EXPLAIN_ANSWER("Explain the best answer in beginner-friendly language."),
-    SUMMARISE_TOPIC("Summarise the topic in three concise study points."),
-    CREATE_FLASHCARDS("Create three flashcards for quick revision."),
-    SUGGEST_STUDY_PLAN("Suggest a short study plan for this task.")
+@Composable
+private fun AiActionButton(
+    text: String,
+    isLoading: Boolean,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        enabled = !isLoading,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = colorResource(id = R.color.action_green),
+            contentColor = colorResource(id = R.color.text_black)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text(text = text, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+private fun AiTextSection(
+    title: String,
+    body: String,
+    fontSize: Int
+) {
+    Text(
+        text = title,
+        color = colorResource(id = R.color.card_text_white),
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold
+    )
+    Text(
+        text = body,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(colorResource(id = R.color.field_white))
+            .padding(12.dp),
+        color = colorResource(id = R.color.text_black),
+        fontSize = fontSize.sp
+    )
+}
+
+private fun studentInterestsText(): String = AppData.studentProfile.selectedInterests.joinToString()
+
+private fun learningHistoryText(): String = AppData.studentProfile.learningHistory.joinToString()
+
+private fun Throwable.toReadableMessage(): String = when (this) {
+    is IllegalStateException -> message ?: "Gemini is not configured yet. Please check the API key."
+    is IOException -> "Gemini request failed. Please check your internet connection and try again."
+    else -> "Gemini request failed: ${message ?: "Please try again."}"
 }
