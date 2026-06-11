@@ -8,12 +8,13 @@
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="42dp" android:text="Answered by AI" android:textColor="@color/text_black" android:textSize="15sp" android:textStyle="bold" />
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Your Results" android:textColor="@color/text_black" android:textSize="38sp" android:textStyle="bold" />
+    <TextView android:id="@+id/resultTaskTitleText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Generated Task 1" android:textColor="@color/text_black" android:textSize="17sp" android:textStyle="bold" />
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="28dp" android:layout_weight="1" android:orientation="vertical">
-        <LinearLayout style="@style/ResultCard"><TextView style="@style/ResultTitle" android:text="1. Question 1" /><TextView style="@style/ResultBody" android:text="Response from the model that you're using" /></LinearLayout>
-        <LinearLayout style="@style/ResultCard"><TextView style="@style/ResultTitle" android:text="2. Question 2" /><TextView style="@style/ResultBody" android:text="Response from the model that you're using" /></LinearLayout>
-        <LinearLayout style="@style/ResultCard"><TextView style="@style/ResultTitle" android:text="3. Question 3" /><TextView style="@style/ResultBody" android:text="Response from the model that you're using" /></LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="24dp" android:layout_weight="1" android:orientation="vertical">
+        <LinearLayout style="@style/ResultCard"><TextView android:id="@+id/resultQuestionOneText" style="@style/ResultTitle" android:text="1. Question 1" /><TextView style="@style/ResultBody" android:text="Your selected answer has been recorded for this practice task." /></LinearLayout>
+        <LinearLayout style="@style/ResultCard"><TextView android:id="@+id/resultQuestionTwoText" style="@style/ResultTitle" android:text="2. Question 2" /><TextView style="@style/ResultBody" android:text="Review the prompt and compare your response with the suggested learning approach." /></LinearLayout>
+        <LinearLayout style="@style/ResultCard"><TextView style="@style/ResultTitle" android:text="Learning Summary" /><TextView android:id="@+id/resultSummaryText" style="@style/ResultBody" android:text="Response from the model that you're using" /></LinearLayout>
     </LinearLayout>
 
-    <Button android:layout_width="match_parent" android:layout_height="56dp" android:layout_marginBottom="18dp" android:background="@drawable/bg_green_button" android:text="Continue" android:textAllCaps="false" android:textColor="@color/text_black" android:textSize="18sp" android:textStyle="bold" />
+    <Button android:id="@+id/continueButton" android:layout_width="match_parent" android:layout_height="56dp" android:layout_marginBottom="18dp" android:background="@drawable/bg_green_button" android:text="Continue" android:textAllCaps="false" android:textColor="@color/text_black" android:textSize="18sp" android:textStyle="bold" />
 </LinearLayout>

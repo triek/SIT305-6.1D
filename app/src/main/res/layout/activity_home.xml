@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp">
         <TextView
+            android:id="@+id/homeGreetingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello,\nYour Name"
@@ -26,17 +27,26 @@
             android:src="@drawable/ic_account_circle" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/interestsSummaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Interests: Algorithms, Data Structures"
+        android:textColor="@color/text_black"
+        android:textSize="15sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/bg_notification"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
         <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_notifications" />
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:text="You have 1 task due" android:textColor="@color/text_black" android:textSize="16sp" android:textStyle="bold" />
+        <TextView android:id="@+id/notificationText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:text="You have 1 task due today" android:textColor="@color/text_black" android:textSize="16sp" android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,9 +60,9 @@
         android:padding="18dp">
         <ImageView android:layout_width="34dp" android:layout_height="34dp" android:src="@drawable/ic_auto_awesome" />
         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:layout_weight="1" android:orientation="vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generated Task 1" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Small Description for the generated Task" android:textColor="@color/text_black" android:textSize="14sp" />
+            <TextView android:id="@+id/taskTitleText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Generated Task 1" android:textColor="@color/text_black" android:textSize="20sp" android:textStyle="bold" />
+            <TextView android:id="@+id/taskDescriptionText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Small Description for the generated Task" android:textColor="@color/text_black" android:textSize="14sp" />
         </LinearLayout>
-        <ImageButton android:layout_width="46dp" android:layout_height="46dp" android:background="@drawable/bg_circle_green" android:contentDescription="Open task" android:padding="10dp" android:src="@drawable/ic_arrow_forward" />
+        <ImageButton android:id="@+id/openTaskButton" android:layout_width="46dp" android:layout_height="46dp" android:background="@drawable/bg_circle_green" android:contentDescription="Open task" android:padding="10dp" android:src="@drawable/ic_arrow_forward" />
     </LinearLayout>
 </LinearLayout>
