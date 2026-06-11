@@ -41,6 +41,7 @@
             android:paddingEnd="20dp" />
 
         <Button
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="28dp"
@@ -52,6 +53,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/createAccountLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"

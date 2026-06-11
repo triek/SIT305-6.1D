@@ -24,6 +24,7 @@
         android:textSize="16sp" />
 
     <GridLayout
+        android:id="@+id/interestsGrid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="34dp"
@@ -35,13 +36,14 @@
         <TextView style="@style/TopicChip" android:text="Data Structures" />
         <TextView style="@style/TopicChip" android:text="Web Development" />
         <TextView style="@style/TopicChip" android:text="Testing" />
-        <TextView style="@style/TopicChip" android:text="Algorithms" />
-        <TextView style="@style/TopicChip" android:text="Data Structures" />
-        <TextView style="@style/TopicChip" android:text="Web Development" />
-        <TextView style="@style/TopicChip" android:text="Testing" />
+        <TextView style="@style/TopicChip" android:text="Mobile Apps" />
+        <TextView style="@style/TopicChip" android:text="Databases" />
+        <TextView style="@style/TopicChip" android:text="Cybersecurity" />
+        <TextView style="@style/TopicChip" android:text="Cloud Computing" />
     </GridLayout>
 
     <Button
+        android:id="@+id/interestsNextButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginBottom="18dp"
